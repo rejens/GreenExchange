@@ -7,7 +7,7 @@ export default async function Layout({ children }) {
    //checking session for admin
    const session = await getServerSession();
    if (session) {
-      // redirect("/admin/dashboard");
+      redirect("/admin/dashboard");
    }
 
    return <div>{children}</div>;

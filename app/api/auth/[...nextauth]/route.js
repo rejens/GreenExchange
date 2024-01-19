@@ -28,18 +28,7 @@ const authOptions = {
    jwt: {
       maxAge: 5,
    },
-   callbacks: {
-      // signIn({ user, account, profile, email, credentials }) {
-      //    console.log("signin callback");
-      //    console.log(user, account, profile, email, credentials);
-      //    return true;
-      // },
-      // session({ session }) {
-      //    console.log("this should run every fucking time i call session ");
-      //    session.user.value = "hello";
-      //    return session;
-      // },
-   },
+
    pages: {
       signIn: "/auth/login",
    },

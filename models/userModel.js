@@ -4,6 +4,7 @@ const userSchema = new Schema({
    email: {
       type: String,
       required: true,
+      unique: true,
    },
    password: {
       type: String,
@@ -11,5 +12,5 @@ const userSchema = new Schema({
    },
 });
 
-const Password = models.user || model("users", userSchema);
-export default Password;
+const users = models.users || model("users", userSchema);
+export default users;

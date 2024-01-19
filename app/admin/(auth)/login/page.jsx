@@ -6,32 +6,10 @@ import { TfiLock } from "react-icons/tfi";
 import { useSession, signIn } from "next-auth/react";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const AdminAuthPage = () => {
-   // const [formData, setFormData] = useState({ email: "", password: "" });
-
-   // const handleChange = (e) => {
-   //    setFormData({ ...formData, [e.target.id]: e.target.value });
-   // };
-
-   // const handleSubmit = async (e) => {
-   //    e.preventDefault();
-
-   //    console.log(formData);
-
-   //    // if (!formData.email || !formData.password) {
-   //    //    return toast.error("Please fill all the fields");
-   //    // } else {
-   //    //    try {
-   //    //       await signIn("credentials", {
-   //    //          email: formData.email,
-   //    //          password: formData.password,
-   //    //       });
-   //    //    } catch (error) {
-   //    //       console.log(error);
-   //    //    }
-   //    // }
-   // };
+   const router = useRouter();
 
    const handleSubmit = async (e) => {
       e.preventDefault();
@@ -46,10 +24,8 @@ const AdminAuthPage = () => {
       if (response.status === 401) {
          alert("email or password not correct");
       } else if (response.status === 200) {
-         console.log("correct");
-         // redirect("/admin");
-         // router.push("/admin");
-         // router.refresh();
+         router.push("/admin/dashboard");
+         router.refresh();
       }
    };
 
