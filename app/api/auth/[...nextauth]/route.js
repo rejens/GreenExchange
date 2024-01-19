@@ -1,7 +1,7 @@
 import NextAuth from "next-auth";
 import connectDB from "@/config/connectDb";
 import CredentialsProvider from "next-auth/providers/credentials";
-import userModel from "@/models/userModel";
+import UserModel from "@/models/userModel";
 
 const authOptions = {
    providers: [
@@ -14,16 +14,14 @@ const authOptions = {
 
          async authorize(credentials, req) {
             const { email, password } = credentials;
-            console.log("email", email);
-            console.log("password", password);
 
-            // await connectDB();
-            // const details = await AdminModel.findOne({ email });
-            // if (details.password === password) {
-            //    return details;
-            // } else {
-            //    return null;
-            // }
+            await connectDB();
+            const details = await UserModel.findOne({ email });
+            if (details.password === password) {
+               return details;
+            } else {
+               return null;
+            }
          },
       }),
    ],

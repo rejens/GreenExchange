@@ -8,29 +8,49 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 
 const AdminAuthPage = () => {
-   const [formData, setFormData] = useState({ email: "", password: "" });
+   // const [formData, setFormData] = useState({ email: "", password: "" });
 
-   const handleChange = (e) => {
-      setFormData({ ...formData, [e.target.id]: e.target.value });
-   };
+   // const handleChange = (e) => {
+   //    setFormData({ ...formData, [e.target.id]: e.target.value });
+   // };
+
+   // const handleSubmit = async (e) => {
+   //    e.preventDefault();
+
+   //    console.log(formData);
+
+   //    // if (!formData.email || !formData.password) {
+   //    //    return toast.error("Please fill all the fields");
+   //    // } else {
+   //    //    try {
+   //    //       await signIn("credentials", {
+   //    //          email: formData.email,
+   //    //          password: formData.password,
+   //    //       });
+   //    //    } catch (error) {
+   //    //       console.log(error);
+   //    //    }
+   //    // }
+   // };
 
    const handleSubmit = async (e) => {
       e.preventDefault();
+      const formData = new FormData(e.currentTarget);
 
-      console.log(formData);
-
-      // if (!formData.email || !formData.password) {
-      //    return toast.error("Please fill all the fields");
-      // } else {
-      //    try {
-      //       await signIn("credentials", {
-      //          email: formData.email,
-      //          password: formData.password,
-      //       });
-      //    } catch (error) {
-      //       console.log(error);
-      //    }
-      // }
+      const response = await signIn("credentials", {
+         email: formData.get("email"),
+         password: formData.get("password"),
+         redirect: false,
+      });
+      console.log("response", response);
+      if (response.status === 401) {
+         alert("email or password not correct");
+      } else if (response.status === 200) {
+         console.log("correct");
+         // redirect("/admin");
+         // router.push("/admin");
+         // router.refresh();
+      }
    };
 
    return (
@@ -54,6 +74,8 @@ const AdminAuthPage = () => {
                            <div className="relative">
                               <input
                                  type="email"
+                                 name="email"
+                                 id="email"
                                  placeholder="Enter your email"
                                  className="w-full rounded-lg border bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none"
                               />
@@ -71,6 +93,8 @@ const AdminAuthPage = () => {
                            <div className="relative">
                               <input
                                  type="password"
+                                 name="password"
+                                 id="password"
                                  placeholder="6+ Characters, 1 Capital letter"
                                  className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none "
                               />

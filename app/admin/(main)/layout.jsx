@@ -11,7 +11,7 @@ const DefaultLayout = lazy(() => import("@/components/layouts/DefaultLayout"));
 const AdminLayout = async ({ children }) => {
    const session = await getServerSession();
    if (!session) {
-      redirect("/admin/login");
+      // redirect("/admin/login");
    }
 
    return (
