@@ -53,37 +53,62 @@ const DataTableGoods = ({ defaultData }) => {
       header: () => <span>S.N.</span>,
       footer: (info) => info.column.id,
     }),
+    columnHelper.accessor('goodsType', {
+      id: 'goodsType',
+      cell: (info) => (
+        <div className='flex gap-2 items-center'>
+          <a
+            target='_blank'
+            href={info.row.original.goodsImage || ''}
+            className='avatar flex-shrink-0'
+          >
+            <img
+              className='rounded-full w-10 h-10'
+              src={info.row.original.goodsImage || ''}
+              alt={info.getValue()}
+            />
+          </a>
+          <p className='text-sm'> {info.getValue()}</p>
+        </div>
+      ),
+      header: () => <span>Goods Type</span>,
+      footer: (info) => info.column.type,
+    }),
+    columnHelper.accessor('name', {
+      id: 'name',
+      cell: (info) => (
+        <h5 className='font-medium text-black'>{info.getValue()}</h5>
+      ),
+      header: () => <span>Name</span>,
+      footer: (info) => info.column.name,
+    }),
     columnHelper.accessor('phone', {
       id: 'phone',
       cell: (info) => (
         <h5 className='font-medium text-black'>{info.getValue()}</h5>
       ),
-      header: () => <span>phone</span>,
+      header: () => <span>Phone</span>,
       footer: (info) => info.column.phone,
     }),
 
-    columnHelper.accessor('goodsType', {
-      id: 'goodsType',
-      cell: (info) => <p className='text-black'>{info.getValue() || 'N/A'}</p>,
-      header: () => <span>Pan Number</span>,
-      footer: (info) => info.column.goodsType,
-    }),
     columnHelper.accessor('goodsWeight', {
       id: 'goodsWeight',
-      cell: (info) => <p className='text-black'>{info.getValue() || 'N/A'}</p>,
-      header: () => <span>goodsWeight</span>,
+      cell: (info) => (
+        <p className='text-black'>{info.getValue() + ' kg' || 'N/A'}</p>
+      ),
+      header: () => <span>Weight</span>,
       footer: (info) => info.column.goodsWeight,
     }),
     columnHelper.accessor('type', {
       id: 'type',
       cell: (info) => <p className='text-black'>{info.getValue() || 'N/A'}</p>,
-      header: () => <span>type</span>,
+      header: () => <span>Type</span>,
       footer: (info) => info.column.type,
     }),
     columnHelper.accessor('status', {
       id: 'status',
       cell: (info) => <p className='text-black'>{info.getValue() || 'N/A'}</p>,
-      header: () => <span>status</span>,
+      header: () => <span>Satus</span>,
       footer: (info) => info.column.status,
     }),
     columnHelper.accessor('action', {
@@ -91,15 +116,7 @@ const DataTableGoods = ({ defaultData }) => {
       cell: (info) => (
         <div className='flex items-center space-x-3.5'>
           <Link
-            href={`/sales/create?cID=${info.row.original._id}`}
-            className='px-3 py-2 text-sm font-medium text-center inline-flex items-center text-white bg-blue-600 rounded-lg hover:opacity-95 focus:ring-4 focus:outline-none focus:ring-blue-600 '
-          >
-            <BiPlus className='me-1 h-[18px] w-[18px]' />
-            Create Sales
-          </Link>
-
-          <Link
-            href={`/customers/edit/${info.row.original._id}`}
+            href={`/admin/goods/edit/${info.row.original._id}`}
             className='px-3 py-2 text-sm font-medium text-center inline-flex items-center text-white bg-green-600 rounded-lg hover:opacity-95 focus:ring-4 focus:outline-none focus:ring-meta-3 '
           >
             <BiEdit className='me-1 h-[18px] w-[18px]' />
@@ -207,7 +224,7 @@ const DataTableGoods = ({ defaultData }) => {
           </div>
           <div className='flex gap-2 items-center'>
             <button
-              className='rounded border disabled:bg-gray disabled:text-black bg-blue-600 text-white  py-2 px-4  focus:border-blue-600 focus-visible:outline-none dark:border-strokedark '
+              className='rounded border disabled:bg-black/5 disabled:text-black/50 bg-blue-600 text-white py-2 px-4 focus:border-blue-600 focus-visible:outline-none dark:border-strokedark'
               onClick={() => {
                 table.setPageIndex(0)
               }}
@@ -216,21 +233,21 @@ const DataTableGoods = ({ defaultData }) => {
               First Page
             </button>
             <button
-              className='rounded border disabled:bg-gray disabled:text-black bg-blue-600 text-white  py-2 px-4  focus:border-blue-600 focus-visible:outline-none dark:border-strokedark '
+              className='rounded border disabled:bg-black/5 disabled:text-black/50 bg-blue-600 text-white  py-2 px-4  focus:border-blue-600 focus-visible:outline-none dark:border-strokedark '
               onClick={() => table.previousPage()}
               disabled={!table.getCanPreviousPage()}
             >
               {'<<'}
             </button>
             <button
-              className='rounded border disabled:bg-gray disabled:text-black bg-blue-600 text-white  py-2 px-4  focus:border-blue-600 focus-visible:outline-none dark:border-strokedark '
+              className='rounded border disabled:bg-black/5 disabled:text-black/50 bg-blue-600 text-white  py-2 px-4  focus:border-blue-600 focus-visible:outline-none dark:border-strokedark '
               onClick={() => table.nextPage()}
               disabled={!table.getCanNextPage()}
             >
               {'>>'}
             </button>
             <button
-              className='rounded border disabled:bg-gray disabled:text-black bg-blue-600 text-white  py-2 px-4  focus:border-blue-600 focus-visible:outline-none dark:border-strokedark '
+              className='rounded border disabled:bg-black/5 disabled:text-black/50 bg-blue-600 text-white  py-2 px-4  focus:border-blue-600 focus-visible:outline-none dark:border-strokedark '
               onClick={() => {
                 table.setPageIndex(table.getPageCount() - 1)
               }}

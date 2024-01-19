@@ -1,6 +1,6 @@
-import { NextResponse } from "next/server";
-import GoodsModel from "@/models/goodsModel";
-import connectDB from "@/components/layouts/config/connectDb";
+import { NextResponse } from 'next/server'
+import GoodsModel from '@/models/goodsModel'
+import connectDB from '@/config/connectDb'
 
 //    @desc:   Get all goods
 //    @route:  GET /api/goods
@@ -8,11 +8,11 @@ import connectDB from "@/components/layouts/config/connectDb";
 
 export async function GET() {
   try {
-    await connectDB();
-    const response = await GoodsModel.find({});
-    return NextResponse.json(response, { status: 200 });
+    await connectDB()
+    const response = await GoodsModel.find({})
+    return NextResponse.json(response, { status: 200 })
   } catch (err) {
-    return NextResponse.json({ error: err.message }, { status: 500 });
+    return NextResponse.json({ error: err.message }, { status: 500 })
   }
 }
 
@@ -22,11 +22,11 @@ export async function GET() {
 
 export async function POST(request, { params }) {
   try {
-    await connectDB();
-    const req = await request.json();
-    const response = await GoodsModel.create(req);
-    return NextResponse.json(response, { status: 201 });
+    await connectDB()
+    const req = await request.json()
+    const response = await GoodsModel.create(req)
+    return NextResponse.json(response, { status: 201 })
   } catch (err) {
-    return NextResponse.json({ error: err.message }, { status: 500 });
+    return NextResponse.json({ error: err.message }, { status: 500 })
   }
 }

@@ -35,9 +35,11 @@ const AdminAuthPage = () => {
     <>
       <div className='rounded-sm bg-white '>
         <div className='flex flex-wrap items-center h-screen justify-center'>
-          <div className='w-full shadow xl:w-1/2 xl:border-l-2'>
+          <div className='w-full shadow xl:w-1/3 xl:border-l-2'>
             <div className='w-full p-4 sm:p-12.5 xl:p-17.5'>
-              <span className='mb-1.5 block font-medium'>GreenExchange</span>
+              <span className='mb-1.5 block font-medium text-green-600'>
+                GreenExchange
+              </span>
               <h2 className='mb-9 text-2xl font-bold text-black sm:text-title-xl2'>
                 Sign In to Admin Panel
               </h2>

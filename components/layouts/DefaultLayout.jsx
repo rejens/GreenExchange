@@ -6,7 +6,7 @@ import Header from '@/components/admin/Header'
 const DefaultLayout = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   return (
-    <div className='bg-white'>
+    <div className=' bg-slate-100'>
       {/* <!-- ===== Page Wrapper Start ===== --> */}
       <div className='flex h-screen overflow-hidden'>
         {/* <!-- ===== Sidebar Start ===== --> */}
