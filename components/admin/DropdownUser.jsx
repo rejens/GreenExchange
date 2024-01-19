@@ -66,7 +66,7 @@ const DropdownUser = () => {
           }`}
         >
           <FaChevronDown
-            className={`h-[20px] w-[15px] dark:text-white ${
+            className={`h-[20px] w-[15px] ${
               dropdownOpen ? 'rotate-180' : ''
             }'}`}
           />

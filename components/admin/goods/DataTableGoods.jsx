@@ -18,6 +18,7 @@ import { BiEdit, BiPlus } from 'react-icons/bi'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
 import { deleteGoods } from '@/lib/goodsAction'
+import moment from 'moment'
 
 const DataTableGoods = ({ defaultData }) => {
   const router = useRouter()
@@ -89,6 +90,18 @@ const DataTableGoods = ({ defaultData }) => {
       ),
       header: () => <span>Phone</span>,
       footer: (info) => info.column.phone,
+    }),
+    columnHelper.accessor('pickupTime', {
+      id: 'pickupTime',
+      cell: (info) => (
+        <h5 className='font-medium text-black'>
+          {moment(info.row.original.pickupDate).format('LL') +
+            ', ' +
+            moment(info.getValue()).format('LT')}
+        </h5>
+      ),
+      header: () => <span>Pick Up Time</span>,
+      footer: (info) => info.column.pickupTime,
     }),
 
     columnHelper.accessor('goodsWeight', {
