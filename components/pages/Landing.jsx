@@ -16,6 +16,7 @@ import {
   Text,
   useSteps,
 } from "@chakra-ui/react";
+import { createGoods } from "@/lib/goodsAction";
 
 const steps = [
   { title: "First", description: "Date & Time" },
@@ -30,8 +31,10 @@ function Landing() {
     count: steps.length,
   });
   const [image, setImage] = useState("");
+  const [imageFile, setImageFile] = useState("");
   const [data, setData] = useState({
     date: "",
+    name: "",
     time: "",
     phone: "",
     type: "",
@@ -39,9 +42,10 @@ function Landing() {
     description: "",
     address: "",
     option: "sell",
+    image: "",
   });
 
-  function submit() {
+  function validate() {
     if (
       data.date == "" ||
       data.time == "" ||
@@ -50,7 +54,8 @@ function Landing() {
       data.weight == "" ||
       image == "" ||
       data.description == "" ||
-      data.address == ""
+      data.address == "" ||
+      data.name == ""
     ) {
       //  check which field is empty
       if (data.date == "") {
@@ -93,9 +98,60 @@ function Landing() {
         setSteps(3);
         return;
       }
+      if (data.name == "") {
+        alert("Name is empty");
+        setSteps(3);
+        return;
+      }
     } else {
-      alert("Submitted");
+      data.image = image;
+      uploadImage();
     }
+  }
+
+  function uploadImage() {
+    const api = "c8d17bc39c6ea98676f5d7d2d882285d";
+    const url = "https://api.imgbb.com/1/upload?key=" + api;
+
+    const image = imageFile;
+    console.log(image);
+    let imgUrl = image;
+    const reader = new FileReader();
+    reader.readAsDataURL(image);
+
+    reader.onloadend = () => {
+      imgUrl = reader.result;
+    };
+
+    const formData = new FormData();
+    formData.append("image", imgUrl);
+
+    fetch(url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        const imageUrl = result.data?.display_url;
+        submitToServer(imageUrl);
+      })
+      .catch((error) => console.error("Error:", error));
+  }
+
+  async function submitToServer(e) {
+    const res = await createGoods({
+      pickupDate: data.date,
+      pickupTime: data.time,
+      phone: data.phone,
+      goodsType: data.type,
+      goodsWeight: data.weight,
+      goodsDescription: data.description,
+      pickupAddress: data.address,
+      name: data.name,
+      type: data.option,
+      goodsImage: e,
+    });
+    console.log(res);
   }
 
   return (
@@ -124,7 +180,7 @@ function Landing() {
         className='flex flex-col p-8 rounded-md shadow-md slideUp justify-between'
         style={{
           border: "1px solid #0000002a",
-          height: 500,
+          minHeight: 500,
           width: 480,
           backgroundColor: "rgba(255,255,255,0.8)",
           backdropFilter: "blur(10px)",
@@ -282,13 +338,16 @@ function Landing() {
                     )) || (
                       <input
                         type='file'
-                        onChange={() => {
+                        id='image'
+                        onChange={(e) => {
                           setImage(
                             URL.createObjectURL(
                               document.querySelector("input[type=file]")
                                 .files[0]
                             )
                           );
+
+                          setImageFile(e.target.files[0]);
                         }}
                         accept='image/*'
                         className='hidden'
@@ -357,7 +416,7 @@ function Landing() {
                 </div>
               </div>
               <div className='flex gap-5 flex-wrap pt-5'>
-                <div className='w-full'>
+                <div className='w-full md:w-7/12'>
                   <div className='flex flex-col gap-2'>
                     <label className='text-sm font-bold text-gray-700 tracking-wide'>
                       Address
@@ -370,6 +429,22 @@ function Landing() {
                         setData({ ...data, address: e.target.value });
                       }}
                       defaultValue={data.address}
+                    />
+                  </div>
+                </div>
+                <div className='w-full md:w-4/12'>
+                  <div className='flex flex-col gap-2'>
+                    <label className='text-sm font-bold text-gray-700 tracking-wide'>
+                      Name
+                    </label>
+                    <input
+                      className='text-base py-2 border-b p-5 w-full border-gray-300 focus:outline-none focus:border-indigo-500'
+                      type='text'
+                      placeholder='Ram Pd. Sharma'
+                      onChange={(e) => {
+                        setData({ ...data, name: e.target.value });
+                      }}
+                      defaultValue={data.name}
                     />
                   </div>
                 </div>
@@ -397,7 +472,7 @@ function Landing() {
             colorScheme='blue'
             onClick={() => {
               if (step == 3) {
-                submit();
+                validate();
               } else {
                 setSteps(step + 1);
               }

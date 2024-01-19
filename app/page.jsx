@@ -3,6 +3,7 @@ import Navbar from "@/components/layouts/Navbar";
 import Image from "next/image";
 import About from "@/components/pages/About";
 import HowItWorks from "@/components/pages/HowItWorks";
+import Trees from "@/components/pages/Trees";
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       <Landing />
       <About />
       <HowItWorks />
+      <Trees />
     </main>
   );
 }
