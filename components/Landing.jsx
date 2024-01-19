@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import BgImg from "../res/bg.jpg";
+import { Button, ButtonGroup } from "@chakra-ui/react";
 
 function Landing() {
   return (
