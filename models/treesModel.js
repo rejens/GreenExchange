@@ -1,24 +1,23 @@
-import { mongoose } from 'mongoose'
+import { Schema, model, models } from "mongoose";
+const treesSchema = new Schema({
+   latitude: {
+      type: String,
+      required: true,
+   },
+   longitude: {
+      type: String,
+      required: true,
+   },
+   treeType: {
+      type: String,
+      required: true,
+   },
+   plantedDate: {
+      type: Date,
+      required: true,
+   },
+});
 
-const treesSchema = new mongoose.Schema({
-  latitude: {
-    type: String,
-    required: true,
-  },
-  longitude: {
-    type: String,
-    required: true,
-  },
-  treeType: {
-    type: String,
-    required: true,
-  },
-  plantedDate: {
-    type: Date,
-    required: true,
-  },
-})
+const Tree = models.trees || model("trees", treesSchema);
 
-const Tree = mongoose.model.trees || mongoose.model('trees', treesSchema)
-
-export default Tree
+export default Tree;
