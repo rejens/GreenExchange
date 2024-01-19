@@ -22,7 +22,7 @@ const goodsSchema = new Schema({
       required: true,
    },
    goodsWeight: {
-      type: String,
+      type: Number,
       required: true,
    },
    goodsDescription: {
