@@ -16,6 +16,7 @@ import { LiaShippingFastSolid } from 'react-icons/lia'
 import { HiOutlineUsers } from 'react-icons/hi'
 import useLocalStorage from 'use-local-storage'
 import { signOut, useSession } from 'next-auth/react'
+import { LuTreePine } from 'react-icons/lu'
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const { data: session } = useSession()
@@ -109,6 +110,19 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 >
                   <BsBag className='h-[18px] w-[18px]' />
                   Goods
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href='/admin/trees'
+                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium duration-300 ease-in-out hover:bg-bodydark1 dark:hover:bg-meta-4 ${
+                    pathname === '/admin/trees'
+                      ? 'bg-gray dark:bg-graydark'
+                      : ''
+                  }`}
+                >
+                  <LuTreePine className='h-[18px] w-[18px]' />
+                  Trees
                 </Link>
               </li>
             </ul>
