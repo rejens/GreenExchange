@@ -1,19 +1,27 @@
-import Provider from '@/components/providers/Provider'
-import React from 'react'
-import { lazy } from 'react'
-import { Toaster } from 'react-hot-toast'
+import Provider from "@/components/providers/Provider";
+import React from "react";
+import { lazy } from "react";
+import { Toaster } from "react-hot-toast";
 
-const DefaultLayout = lazy(() => import('@/components/layouts/DefaultLayout'))
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 
-const AdminLayout = ({ children }) => {
-  return (
-    <Provider>
-      <DefaultLayout>
-        <Toaster position='top-center' reverseOrder={false} />
-        {children}
-      </DefaultLayout>
-    </Provider>
-  )
-}
+const DefaultLayout = lazy(() => import("@/components/layouts/DefaultLayout"));
 
-export default AdminLayout
+const AdminLayout = async ({ children }) => {
+   const session = await getServerSession();
+   if (!session) {
+      redirect("/admin/login");
+   }
+
+   return (
+      <Provider>
+         <DefaultLayout>
+            <Toaster position="top-center" reverseOrder={false} />
+            {children}
+         </DefaultLayout>
+      </Provider>
+   );
+};
+
+export default AdminLayout;

@@ -45,7 +45,10 @@ export async function DELETE(request, { params }) {
       const { id } = params;
       await connectDB();
       const response = await TreesModel.findByIdAndDelete(id);
-      return NextResponse.json(response, { status: 200 });
+      return NextResponse.json(
+         { message: "tree deleted successfully" },
+         { status: 200 }
+      );
    } catch (err) {
       return NextResponse.json({ error: err.message }, { status: 500 });
    }
