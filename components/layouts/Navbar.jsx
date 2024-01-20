@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/react";
 import { Input } from "@chakra-ui/react";
+import { AiFillGithub } from "react-icons/ai";
 
 function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -27,8 +28,17 @@ function Navbar() {
       </div>
 
       <div className='flex space-x-4'>
-        <Button ref={btnRef} colorScheme='teal' onClick={onOpen}>
-          =
+        <Button
+          ref={btnRef}
+          colorScheme='teal'
+          onClick={() => {
+            window.open(
+              "https://github.com/ABChapagain/GreenExchange",
+              "_blank"
+            );
+          }}
+        >
+          <AiFillGithub />
         </Button>
       </div>
       <Drawer
