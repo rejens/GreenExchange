@@ -20,7 +20,7 @@ function Navbar() {
     <div className='p-2 flex items-center justify-between'>
       <div className='flex'>
         <img
-          src='https://www.greenxchange.nl/static/site/gc-logo.svg'
+          src='https://i.ibb.co/8PTpPkT/image.png'
           alt='logo'
           className='h-8 object-fit'
         />
