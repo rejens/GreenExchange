@@ -1,4 +1,5 @@
 import React from "react";
+import working from "../../res/Working.png";
 
 function HowItWorks() {
   return (
@@ -17,11 +18,7 @@ function HowItWorks() {
         <span className='text-green-600'>How It Works</span>?
       </h2>
       <div className='flex justify-center items-center flex-col gap-5'>
-        <img
-          src='https://i.ibb.co/19Y7X6K/image.png'
-          className='w-8/12 object-cover'
-          alt='why'
-        />
+        <img src={working.src} className='w-8/12 object-cover' alt='why' />
       </div>
     </div>
   );

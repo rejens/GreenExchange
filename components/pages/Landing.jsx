@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import BgImg from "../../res/bg.jpg";
+import working from "../../res/Working.png";
 import { Button, ButtonGroup } from "@chakra-ui/react";
 import { Spinner } from "@chakra-ui/react";
 import {
@@ -28,6 +29,7 @@ const steps = [
 
 function Landing() {
   const [step, setSteps] = useState(1);
+  const [submitted, setSubmitted] = useState(false);
   const { activeStep } = useSteps({
     index: 1,
     count: steps.length,
@@ -119,7 +121,6 @@ function Landing() {
     const url = "https://api.imgbb.com/1/upload?key=" + api;
 
     const image = imageFile;
-    console.log(image);
     let imgUrl = image;
     const reader = new FileReader();
     reader.readAsDataURL(image);
@@ -157,7 +158,24 @@ function Landing() {
       goodsImage: e,
     });
     setLoading(false);
-    console.log(res);
+    if (res) {
+      setSubmitted(true);
+      setData({
+        date: "",
+        name: "",
+        time: "",
+        phone: "",
+        type: "",
+        weight: "",
+        description: "",
+        address: "",
+        option: "sell",
+        image: "",
+      });
+      setImage("");
+      setSteps(1);
+      setSubmitted(true);
+    }
   }
 
   let now = moment();
@@ -187,7 +205,7 @@ function Landing() {
 
   return (
     <div
-      className='min-h-screen p-5 flex flex-row justify-center items-center flex-wrap'
+      className='min-h-screen p-5 flex-row-reverse flex justify-center items-center flex-wrap'
       style={{
         backgroundImage: `url(${BgImg.src})`,
         backgroundRepeat: "no-repeat",
@@ -195,16 +213,16 @@ function Landing() {
         backgroundSize: "cover",
       }}
     >
-      <div className='flex gap-5 md:w-1/2 w-full items-center flex-col'>
+      <div className='flex gap-5 md:w-1/2 p-5 rounded-md w-3/8 items-center flex-col'>
         <h2
-          className='sm:text-xl text-green-700 font-bold'
+          className='sm:text-xl text-white font-bold'
           style={{
             fontSize: 60,
           }}
         >
           GreenExchange
         </h2>
-        <p className='text-xl'>Exchange Greenery with Waste</p>
+        <p className='text-xl text-white'>Exchange Greenery with Waste</p>
       </div>
 
       <div
@@ -260,7 +278,7 @@ function Landing() {
           {/* Step1 */}
           {step == 1 && (
             <div className='flex gap-5 flex-wrap pt-12'>
-              <div className='w-full md:w-5/12'>
+              <div className='w-full '>
                 <div className='flex flex-col gap-2'>
                   <label className='text-sm font-bold text-gray-700 tracking-wide'>
                     Date
@@ -290,7 +308,7 @@ function Landing() {
                   </select>
                 </div>
               </div>
-              <div className='w-full md:w-5/12'>
+              <div className='w-full '>
                 <div className='flex flex-col gap-2'>
                   <label className='text-sm font-bold text-gray-700 tracking-wide'>
                     Time
@@ -314,7 +332,7 @@ function Landing() {
           {step == 2 && (
             <div className=''>
               <div className='flex gap-5 flex-wrap pt-5'>
-                <div className='w-full md:w-5/12'>
+                <div className='w-full '>
                   <div className='flex flex-col gap-2'>
                     <label className='text-sm font-bold text-gray-700 tracking-wide'>
                       Phone
@@ -330,7 +348,7 @@ function Landing() {
                     />
                   </div>
                 </div>
-                <div className='w-full md:w-5/12'>
+                <div className='w-full '>
                   <div className='flex flex-col gap-2'>
                     <label className='text-sm font-bold text-gray-700 tracking-wide'>
                       Waste Type
@@ -545,6 +563,50 @@ function Landing() {
           >
             {step == 3 ? "Submit" : "Next"}
           </Button>
+        </div>
+      </div>
+
+      {/* Submit Model */}
+      <div
+        className='items-center h-screen w-full flex-col p-8 rounded-md shadow-md slideUp justify-center absolute top-0 left-0 bg-white'
+        style={{
+          border: "1px solid #0000002a",
+          backgroundColor: "rgba(0,255,0,0.1)",
+          backdropFilter: "blur(10px)",
+          display: submitted ? "flex" : "none",
+          zIndex: 100,
+        }}
+      >
+        <div className='flex flex-col  w-96 p-5  items-center rounded-md bg-[#357e35] shadow-md'>
+          <h2 className='text-white text-xl text-center font-bold'>
+            Hello, {data?.name} !!
+          </h2>
+          <div className='flex flex-col bg-green-500 rounded-md mt-5 p-5'>
+            <p className='text-white text-xl font-bold'>Did you Know?</p>
+            <p
+              className='
+                  text-white
+                  items-center
+            '
+            >
+              <span className='text-white'>20% of Profit</span> goes in planting
+              the trees. And You are helping to make our environment green.
+              <span className=' mt-6  justify-center text-center text-blue-900 font-3xl p-2 rounded-full block'>
+                # Go Green
+              </span>
+            </p>
+          </div>
+          <div className='flex w-full justify-end items-center'>
+            <Button
+              colorScheme='green'
+              className='mt-5 rounded-full'
+              onClick={() => {
+                setSubmitted(false);
+              }}
+            >
+              Close
+            </Button>
+          </div>
         </div>
       </div>
     </div>

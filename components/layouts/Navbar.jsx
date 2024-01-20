@@ -19,7 +19,12 @@ function Navbar() {
   const btnRef = React.useRef();
   return (
     <div className='p-2 flex items-center justify-between'>
-      <div className='flex'>
+      <div
+        className='flex'
+        onClick={() => {
+          window.location.href = "/";
+        }}
+      >
         <img
           src='https://i.ibb.co/8PTpPkT/image.png'
           alt='logo'
@@ -38,7 +43,7 @@ function Navbar() {
             );
           }}
         >
-          <AiFillGithub />
+          <AiFillGithub size={25} />
         </Button>
       </div>
       <Drawer
