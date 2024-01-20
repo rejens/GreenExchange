@@ -8,7 +8,6 @@ import React, { Suspense } from 'react'
 
 const AdminTreesPage = async () => {
   const trees = await getAllTrees()
-  console.log(trees)
 
   return (
     <>

@@ -10,7 +10,7 @@ const EditGoodPage = async ({ params: { id } }) => {
     <>
       <Breadcrumb
         pageNames={['Goods', 'Edit Status']}
-        hrefs={['/admin', '/admin/goods']}
+        hrefs={['/admin/goods']}
       />
 
       <Suspense fallback={<Loader />}>

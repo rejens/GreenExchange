@@ -91,8 +91,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
               <li>
                 <Link
                   href='/admin/dashboard'
-                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium duration-300 ease-in-out hover:bg-bodydark1 dark:hover:bg-meta-4 ${
-                    pathname === '/admin' ? 'bg-gray dark:bg-graydark' : ''
+                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium duration-300 ease-in-out hover:bg-slate-100 ${
+                    pathname === '/admin/dashboard' ? 'bg-black/5' : 'bg-white'
                   }`}
                 >
                   <RxDashboard className='h-[18px] w-[18px]' />
@@ -102,10 +102,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
               <li>
                 <Link
                   href='/admin/goods'
-                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium duration-300 ease-in-out hover:bg-bodydark1 dark:hover:bg-meta-4 ${
-                    pathname === '/admin/goods'
-                      ? 'bg-gray dark:bg-graydark'
-                      : ''
+                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium duration-300 ease-in-out hover:bg-slate-100 ${
+                    pathname === '/admin/goods' ? 'bg-black/5' : ''
                   }`}
                 >
                   <BsBag className='h-[18px] w-[18px]' />
@@ -115,10 +113,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
               <li>
                 <Link
                   href='/admin/trees'
-                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium duration-300 ease-in-out hover:bg-bodydark1 dark:hover:bg-meta-4 ${
-                    pathname === '/admin/trees'
-                      ? 'bg-gray dark:bg-graydark'
-                      : ''
+                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium duration-300 ease-in-out hover:bg-slate-100 ${
+                    pathname === '/admin/trees' ? 'bg-black/5' : ''
                   }`}
                 >
                   <LuTreePine className='h-[18px] w-[18px]' />
@@ -137,8 +133,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
               <li>
                 <Link
                   href='/settings'
-                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium  duration-300 ease-in-out hover:bg-bodydark1 dark:hover:bg-meta-4 ${
-                    pathname === '/settings' ? 'bg-gray dark:bg-graydark' : ''
+                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium  duration-300 ease-in-out hover:bg-slate-100 ${
+                    pathname === '/settings' ? 'bg-black/5' : ''
                   }`}
                 >
                   <FiSettings className='h-[18px] w-[18px]' />
@@ -147,7 +143,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
               </li>
               <li>
                 <button
-                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium  duration-300 ease-in-out hover:bg-bodydark1 dark:hover:bg-meta-4 w-full`}
+                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium  duration-300 ease-in-out hover:bg-slate-100 w-full`}
                   onClick={() => signOut()}
                 >
                   <BiLogOut className='h-[18px] w-[18px]' />
