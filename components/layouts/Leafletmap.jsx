@@ -1,24 +1,25 @@
-"use client";
+'use client'
 
-import "leaflet/dist/leaflet.css";
+import 'leaflet/dist/leaflet.css'
 
-import React from "react";
-import { MapContainer } from "react-leaflet/MapContainer";
-import { TileLayer } from "react-leaflet/TileLayer";
-import { Marker } from "react-leaflet/Marker";
-import { Popup } from "react-leaflet/Popup";
-import { getAllTrees } from "@/lib/treesAction";
+import React from 'react'
+import { MapContainer } from 'react-leaflet/MapContainer'
+import { TileLayer } from 'react-leaflet/TileLayer'
+import { Marker } from 'react-leaflet/Marker'
+import { Popup } from 'react-leaflet/Popup'
+import { getAllTrees } from '@/lib/treesAction'
+import moment from 'moment'
 // import { useMap } from "react-leaflet/hooks";
 
 async function Leafletmap() {
-  const trees = await getAllTrees();
+  const trees = await getAllTrees()
 
-  const newLocal = "/marker-icon.png";
+  const newLocal = '/marker-icon.png'
   const customIcon = new L.Icon({
     iconUrl: newLocal,
     iconSize: [25, 41],
     iconAnchor: [12, 41],
-  });
+  })
 
   return (
     <div className='h-[600px] mb-20'>
@@ -27,9 +28,9 @@ async function Leafletmap() {
         zoom={7}
         scrollWheelZoom={true}
         style={{
-          height: "100%",
-          width: "100%",
-          zIndex: "10",
+          height: '100%',
+          width: '100%',
+          zIndex: '10',
         }}
       >
         <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
@@ -42,16 +43,18 @@ async function Leafletmap() {
             <Popup>
               <div className='flex flex-col justify-center items-center'>
                 <h1 className='text-xl font-bold'>
-                  {tree.numbers} Trees Planted
+                  {tree.numberOfTrees} Trees Planted
                 </h1>
-                <p className='text-sm'>On {tree.plantedDate}</p>
+                <p className='text-sm'>
+                  On {moment(tree.plantedDate).format('LL')}
+                </p>
               </div>
             </Popup>
           </Marker>
         ))}
       </MapContainer>
     </div>
-  );
+  )
 }
 
-export default Leafletmap;
+export default Leafletmap
