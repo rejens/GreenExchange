@@ -3,7 +3,7 @@ import React from "react";
 function Trees() {
   return (
     <div
-      className='h-screen'
+      className='min-h-screen'
       style={{
         backgroundImage:
           "url(https://th.bing.com/th/id/OIP.JM8xhGYldULK0Cw8UFgbyAHaEK?rs=1&pid=ImgDetMain",
