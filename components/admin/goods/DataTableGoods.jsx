@@ -69,7 +69,12 @@ const DataTableGoods = ({ defaultData }) => {
               alt={info.getValue()}
             />
           </a>
-          <p className='text-sm'> {info.getValue()}</p>
+          <div>
+            <p className='text-sm'> {info.getValue()}</p>
+            <p className='text-sm'>
+              ({info.row.original.goodsWeight + ' kg' || 'N/A'})
+            </p>
+          </div>
         </div>
       ),
       header: () => <span>Goods Type</span>,
@@ -104,14 +109,6 @@ const DataTableGoods = ({ defaultData }) => {
       footer: (info) => info.column.pickupTime,
     }),
 
-    columnHelper.accessor('goodsWeight', {
-      id: 'goodsWeight',
-      cell: (info) => (
-        <p className='text-black'>{info.getValue() + ' kg' || 'N/A'}</p>
-      ),
-      header: () => <span>Weight</span>,
-      footer: (info) => info.column.goodsWeight,
-    }),
     columnHelper.accessor('type', {
       id: 'type',
       cell: (info) => <p className='text-black'>{info.getValue() || 'N/A'}</p>,
@@ -120,8 +117,24 @@ const DataTableGoods = ({ defaultData }) => {
     }),
     columnHelper.accessor('status', {
       id: 'status',
-      cell: (info) => <p className='text-black'>{info.getValue() || 'N/A'}</p>,
-      header: () => <span>Satus</span>,
+      cell: (info) => (
+        <p
+          className={`inline-flex rounded-full bg-opacity-10 py-1 px-3 text-sm font-medium 
+          ${
+            info.getValue() === 'Pending'
+              ? 'bg-yellow-600 text-yellow-600'
+              : info.getValue() === 'Received'
+              ? 'bg-blue-600 text-blue-600'
+              : info.getValue() === 'Sent'
+              ? 'bg-green-600 text-green-600'
+              : 'bg-red-600 text-red-600'
+          }
+          `}
+        >
+          {info.getValue()}
+        </p>
+      ),
+      header: () => <span>Status</span>,
       footer: (info) => info.column.status,
     }),
     columnHelper.accessor('action', {
