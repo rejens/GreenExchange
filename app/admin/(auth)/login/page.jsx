@@ -89,7 +89,7 @@ const AdminAuthPage = () => {
                     type='submit'
                     disabled={loading}
                     value='Sign In'
-                    className='w-full cursor-pointer rounded-lg border border-blue-600 bg-blue-600 p-4 text-white transition hover:bg-opacity-90'
+                    className='w-full cursor-pointer rounded-lg border border-green-600 bg-green-600 p-4 text-white transition hover:bg-opacity-90'
                   />
                 </div>
               </form>
