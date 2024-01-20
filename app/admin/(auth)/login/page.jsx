@@ -1,38 +1,36 @@
-"use client";
-import Link from "next/link";
-import { BsEnvelope } from "react-icons/bs";
-import { FiUser } from "react-icons/fi";
-import { TfiLock } from "react-icons/tfi";
-import { useSession, signIn } from "next-auth/react";
-import { useState } from "react";
-import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
+'use client'
+import Link from 'next/link'
+import { BsEnvelope } from 'react-icons/bs'
+import { FiUser } from 'react-icons/fi'
+import { TfiLock } from 'react-icons/tfi'
+import { useSession, signIn } from 'next-auth/react'
+import { useState } from 'react'
+import toast from 'react-hot-toast'
+import { useRouter } from 'next/navigation'
 
 const AdminAuthPage = () => {
-  const [formData, setFormData] = useState({ email: "", password: "" });
+  const router = useRouter()
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.id]: e.target.value });
-  };
+  const [loading, setLoading] = useState(false)
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    console.log(formData);
-
-    // if (!formData.email || !formData.password) {
-    //    return toast.error("Please fill all the fields");
-    // } else {
-    //    try {
-    //       await signIn("credentials", {
-    //          email: formData.email,
-    //          password: formData.password,
-    //       });
-    //    } catch (error) {
-    //       console.log(error);
-    //    }
-    // }
-  };
+    e.preventDefault()
+    const formData = new FormData(e.currentTarget)
+    setLoading(true)
+    const response = await signIn('credentials', {
+      email: formData.get('email'),
+      password: formData.get('password'),
+      redirect: false,
+    })
+    console.log('response', response)
+    if (response.status === 401) {
+      alert('email or password not correct')
+    } else if (response.status === 200) {
+      router.push('/admin/dashboard')
+      router.refresh()
+    }
+    setLoading(false)
+  }
 
   return (
     <>
@@ -89,6 +87,7 @@ const AdminAuthPage = () => {
                 <div className='mb-5'>
                   <input
                     type='submit'
+                    disabled={loading}
                     value='Sign In'
                     className='w-full cursor-pointer rounded-lg border border-blue-600 bg-blue-600 p-4 text-white transition hover:bg-opacity-90'
                   />
@@ -99,7 +98,7 @@ const AdminAuthPage = () => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default AdminAuthPage;
+export default AdminAuthPage
