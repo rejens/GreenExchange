@@ -4,6 +4,11 @@ import React from "react";
 async function Trees() {
   const trees = await getAllTrees();
 
+  // add all trees numberOfTrees
+  const totalTrees = trees.reduce((acc, tree) => {
+    return acc + tree.numberOfTrees;
+  }, 0);
+
   // filter this month trees
   const thisMonthTrees = trees.filter((tree) => {
     const treeDate = new Date(tree.plantedDate);
@@ -58,7 +63,7 @@ async function Trees() {
       <div className='flex h-80 items-center justify-around bg-white p-5'>
         <div className='flex flex-col'>
           <h1 className='text-4xl text-black font-bold text-center'>
-            {trees?.length}
+            {totalTrees}
           </h1>
           <h4 className='text-xl text-black text-center'>
             Total Trees Planted till now
@@ -66,7 +71,7 @@ async function Trees() {
         </div>
         <div className='flex flex-col'>
           <h1 className='text-4xl text-black font-bold text-center'>
-            {thisMonthTrees?.length}
+            {totalTrees}
           </h1>
           <h4 className='text-xl text-black text-center'>
             Trees Planted this month
