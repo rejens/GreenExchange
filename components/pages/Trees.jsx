@@ -1,6 +1,19 @@
+import { getAllTrees } from "@/lib/treesAction";
 import React from "react";
 
-function Trees() {
+async function Trees() {
+  const trees = await getAllTrees();
+
+  // filter this month trees
+  const thisMonthTrees = trees.filter((tree) => {
+    const treeDate = new Date(tree.plantedDate);
+    const today = new Date();
+    return (
+      treeDate.getMonth() === today.getMonth() &&
+      treeDate.getFullYear() === today.getFullYear()
+    );
+  });
+
   return (
     <div
       className='min-h-screen'
@@ -44,13 +57,17 @@ function Trees() {
       </div>
       <div className='flex h-80 items-center justify-around bg-white p-5'>
         <div className='flex flex-col'>
-          <h1 className='text-4xl text-black font-bold text-center'>2048</h1>
+          <h1 className='text-4xl text-black font-bold text-center'>
+            {trees?.length}
+          </h1>
           <h4 className='text-xl text-black text-center'>
             Total Trees Planted till now
           </h4>
         </div>
         <div className='flex flex-col'>
-          <h1 className='text-4xl text-black font-bold text-center'>854</h1>
+          <h1 className='text-4xl text-black font-bold text-center'>
+            {thisMonthTrees?.length}
+          </h1>
           <h4 className='text-xl text-black text-center'>
             Trees Planted this month
           </h4>

@@ -44,8 +44,10 @@ function Landing() {
     option: "sell",
     image: "",
   });
+  const [Loading, setLoading] = useState(true);
 
   function validate() {
+    setLoading(true);
     if (
       data.date == "" ||
       data.time == "" ||
@@ -57,6 +59,7 @@ function Landing() {
       data.address == "" ||
       data.name == ""
     ) {
+      setLoading(false);
       //  check which field is empty
       if (data.date == "") {
         alert("Date is empty");
@@ -151,6 +154,7 @@ function Landing() {
       type: data.option,
       goodsImage: e,
     });
+    setLoading(false);
     console.log(res);
   }
 
@@ -186,11 +190,26 @@ function Landing() {
           backdropFilter: "blur(10px)",
         }}
       >
+        {/* Loading popup */}
+        <div
+          className='flex flex-col p-8 rounded-md shadow-md slideUp justify-between absolute top-0 left-0 bg-white'
+          style={{
+            border: "1px solid #0000002a",
+            minHeight: 500,
+            width: 480,
+            backgroundColor: "rgba(255,255,255,0.8)",
+            backdropFilter: "blur(10px)",
+            display: Loading ? "flex" : "none",
+          }}
+        >
+          Loading
+        </div>
+        {/* main Component */}
         <div className=''>
           <h2 className='text-xl text-black font-bold text-center pb-8'>
             Call us for Waste Products
           </h2>
-          {/* Tab COunt */}
+          {/* Tab Count */}
           <Stepper index={step}>
             {steps.map((step, index) => (
               <Step key={index}>

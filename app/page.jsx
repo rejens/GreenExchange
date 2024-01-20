@@ -4,8 +4,7 @@ import Image from "next/image";
 import About from "@/components/pages/About";
 import HowItWorks from "@/components/pages/HowItWorks";
 import Trees from "@/components/pages/Trees";
-import Map from "@/components/layouts/Map";
-import { Suspense } from "react";
+
 
 export default function Home() {
   // height, width, markers, zoom, center;
@@ -123,6 +122,7 @@ export default function Home() {
       <About />
       <HowItWorks />
       <Trees />
+
       {/* <Suspense fallback={<div>Loading...</div>}>
         <Map
           height='50vh'
